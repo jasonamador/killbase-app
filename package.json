@@ -1,0 +1,27 @@
+{
+  "name": "killbase-app",
+  "version": "1.0.0",
+  "description": "**Killbase** is a service that allows international assassins and their clients to create, book, and execute contracts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonamador/killbase-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonamador/killbase-app/issues"
+  },
+  "homepage": "https://github.com/jasonamador/killbase-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "knex": "^0.14.2",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.0"
+  }
+}
