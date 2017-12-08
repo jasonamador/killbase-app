@@ -1,0 +1,41 @@
+
+
+                                         +----------------------------+
+                                         | targets                    |
+                                         +----------------------------+
+                                         |                            |
+                                         | id              serial pk  +---------+
+                                  +------+ person_id       integer fk |         |
+                                  |      | location        text       |         |
+                                  |      | photo           text       |         |
+                                  |      | security_level  float      |         |
+                                  |      |                            |         |
+                                  |      +----------------------------+         |
+                                  |                                             |
+                                  |                                             |
+                                  |                                             |               +---------------------------+
+                                  |                                             |               | contracts                 |
+                                  |          +-------------------------+        |               +---------------------------+
+     +-------------------+        |          | clients                 |        |               |                           |
+     | people            |        |          +-------------------------+        |               | id             serial pk  +---+
+     +-------------------+        |          |                         |        +---------------+ target_id      integer fk |   |
+     |                   |        |          | id           serial pk  +------------------------+ client_id      integer fk |   |
+     | id      serial pk +-------------------+ person_id    integer fk |                        | budget         integer    |   |
+     | name    text      |          |        |                         |                        | completed      boolean    |   |
+     |                   |          |        +-------------------------+               +--------+ completed_by   integer fk |   |
+     +-------------------+          |                                                  |        |                           |   |
+                                    |      +-----------------------------+             |        +---------------------------+   |
+                                    |      | assassins                   |             |                                        |
+                                    |      +-----------------------------+             |                                        |
+                                    |      |                             |             |                                        |
+                                    | +----+ id            serial pk     +-------------+                                        |
+                                    +------+ person_id     integer fk    |         |                                            |
+                                      |    | weapon        text          |         |                                            |
+          +-------------------------+ |    | contact_info  text          |         |                                            |
+          | code_names              | |    | price         integer       |         |  +--------------------------+              |
+          +-------------------------+ |    | rating        float         |         |  | assassins_contracts      |              |
+          | assassin_id  integer fk +-+    | num_kills     integer       |         |  +--------------------------+              |
+          | code_name    text       |      | age           integer       |         +--+ assassin_id   integer fk |              |
+          |                         |      |                             |            | contract_id   integer fk +--------------+
+          +-------------------------+      +-----------------------------+            |                          |
+                                                                                      +--------------------------+
