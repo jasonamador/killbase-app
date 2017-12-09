@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTableIfNotExists('targets', (targets) => {
       targets.increments();
       targets.integer('person_id');
-      targets.foreign('person_id').references('people.id');
+      targets.foreign('person_id').references('people.id').onDelete('CASCADE');
       targets.string('location');
       targets.string('photo');
       targets.float('security_level');
