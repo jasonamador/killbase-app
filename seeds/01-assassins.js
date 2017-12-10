@@ -7,8 +7,8 @@ exports.seed = function(knex, Promise) {
   let names = [];
 
   return knex('people').select()
-    .then((result) => {
-      result.forEach((e) => {
+    .then((results) => {
+      results.forEach((e) => {
         peopleIds[e.name] = e.id;
       });
       for (let i = 1; i < assassins.length; i++) {
@@ -28,6 +28,9 @@ exports.seed = function(knex, Promise) {
     })
     .then(() => {
       return knex('assassins').del();
+    })
+    .then(() => {
+      return knex.schema.raw('alter sequence assassins_id_seq restart');
     })
     .then(function () {
       return knex('assassins').insert(assassinsObjs);
