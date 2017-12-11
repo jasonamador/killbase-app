@@ -48,7 +48,7 @@ exports.up = function(knex, Promise) {
       contracts.integer('client_id');
       contracts.foreign('client_id').references('clients.id').onDelete('SET NULL');
       contracts.integer('budget');
-      contracts.boolean('completed');
+      contracts.boolean('complete');
       contracts.integer('completed_by');
       contracts.foreign('completed_by').references('assassins.id').onDelete('SET NULL');
     });
