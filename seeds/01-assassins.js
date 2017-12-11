@@ -1,21 +1,24 @@
 exports.seed = function(knex, Promise) {
   const fs = require('fs');
+
+  // get the assassins file
   let assassinsCsv = fs.readFileSync('./data/assassins.csv', 'UTF-8');
   let assassins = assassinsCsv.trim().replace(/"/g, '').split('\n').map((e) => e.split(', '));
-  let peopleIds = {};
+
+  let peopleNamesToIds = {}; // lookup for people names to ids
   let assassinsObjs = [];
-  let names = [];
+  let names = []; // to easily track the names used so far
 
   return knex('people').select()
-    .then((results) => {
-      results.forEach((e) => {
-        peopleIds[e.name] = e.id;
+    .then((result) => {
+      result.forEach((e) => {
+        peopleNamesToIds[e.name] = e.id;
       });
       for (let i = 1; i < assassins.length; i++) {
         if (!names.includes(assassins[i][0])) {
           names.push(assassins[i][0]);
           assassinsObjs.push({
-            person_id: peopleIds[assassins[i][0]],
+            person_id: peopleNamesToIds[assassins[i][0]],
             weapon: assassins[i][2],
             contact_info: assassins[i][3],
             age: assassins[i][4],

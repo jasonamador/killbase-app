@@ -19,9 +19,9 @@ exports.seed = function(knex, Promise) {
 
   return knex('assassins').select('people.name', 'assassins.id')
     .leftJoin('people', 'assassins.person_id', '=', 'people.id')
-    .then((results) => {
+    .then((result) => {
       // make lookup from assassin name to id
-      results.forEach((e) => {
+      result.forEach((e) => {
         assassinNameToId[e.name] = e.id;
       });
 
@@ -32,7 +32,6 @@ exports.seed = function(knex, Promise) {
         assassinIdCodeName.code_name = codename;
         codenames.push(assassinIdCodeName);
       }
-      console.log(codenames);
     })
     .then(() => {
       return knex('code_names').del();

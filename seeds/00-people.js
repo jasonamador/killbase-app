@@ -1,9 +1,13 @@
 exports.seed = function(knex, Promise) {
   const fs = require('fs');
+
+  // get/parse/clean both files
   let assassinsCsv = fs.readFileSync('./data/assassins.csv', 'UTF-8');
   let assassins = assassinsCsv.trim().replace(/"/g, '').split('\n').map((e) => e.split(', '));
   let contractsCsv = fs.readFileSync('./data/contracts.csv', 'UTF-8');
   let contracts = contractsCsv.trim().replace(/"/g, '').split('\n').map((e) => e.split(', '));
+
+  // create people objects without duplicates
   let names = [];
   let people = [];
   for (let i = 1; i < assassins.length; i++) {

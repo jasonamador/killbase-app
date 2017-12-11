@@ -16,8 +16,8 @@ exports.up = function(knex, Promise) {
       targets.integer('person_id');
       targets.foreign('person_id').references('people.id').onDelete('CASCADE');
       targets.string('location');
-      targets.string('photo');
-      targets.float('security_level');
+      targets.string('photo_url');
+      targets.float('security');
     });
   })
   .then(() => {
