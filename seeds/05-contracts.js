@@ -13,16 +13,6 @@ exports.seed = function(knex, Promise) {
   let clientNamesToIds = {};
   let targetNamesToIds = {};
 
-  /*
-  contract = {
-    target_id:
-    client_id:
-    budget:
-    complete:
-    completed_by:
-  }
-  */
-
   return knex('people')
     .select()
     .then((people) => {
