@@ -1,0 +1,21 @@
+{
+  "name": "killbase-app",
+  "description": "**Killbase** is a service that allows international assassins and their clients to create, book, and execute contracts.",
+  "main": "index.js",
+  "authors": [
+    "Jason Amador <jason.amador@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jasonamador/killbase-app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "typed.js": "^2.0.6",
+    "jquery": "^3.2.1"
+  }
+}

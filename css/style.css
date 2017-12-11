@@ -11,5 +11,6 @@ body {
 }
 
 pre {
-  font-family: monospace;
+  font-family: 'Courier New', Monospace;
+  font-size: 0.2em;
 }
