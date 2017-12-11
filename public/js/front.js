@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.6/typed.min.js"></script>
-  <script src="./js/front.js"></script>
-  <title>KiLLBASE</title>
-</head>
-<body>
-  <div id="title"><p>
-
+const title = `
     ██ ▄█▀ ██▓ ██▓     ██▓     ▄▄▄▄    ▄▄▄        ██████ ▓█████
     ██▄█▒ ▓██▒▓██▒    ▓██▒    ▓█████▄ ▒████▄    ▒██    ▒ ▓█   ▀
    ▓███▄░ ▒██▒▒██░    ▒██░    ▒██▒ ▄██▒██  ▀█▄  ░ ▓██▄   ▒███
@@ -23,10 +9,16 @@
    ░ ░░ ░  ▒ ░  ░ ░     ░ ░    ░    ░   ░   ▒   ░  ░  ░     ░
    ░  ░    ░      ░  ░    ░  ░ ░            ░  ░      ░     ░  ░
                                     ░
-
-  </p>
-  </div>
-  <pre id="typed"></pre>
-
-</body>
-</html>
+`;
+$(function() {
+  $('.typed').typed({
+    stringsElement: $('#assassin'),
+    typeSpeed: -1000,
+    startDelay: 1000,
+  });
+  $('#title').typed({
+    strings: [title],
+    typeSpeed: -1000,
+    startDelay: 0
+  })
+});
