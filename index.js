@@ -1,5 +1,6 @@
 const express = require('express');
 const contracts = require('./routes/contracts');
+const assassins = require('./routes/assassins');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.static('public'));
   ROUTES
 */
 app.use('/contracts', contracts);
+app.use('/assassins', assassins);
 
 app.get('/', (req, res) => {
   res.render('index', {name: 'Jason'});

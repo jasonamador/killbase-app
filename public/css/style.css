@@ -39,11 +39,21 @@ table, th, td {
 }
 
 .container {
-  margin: 30px;
+  max-width: 800px;
+  margin: 30px auto;
 }
 
 .assassin.attribute {
   margin-bottom: 1em;
+}
+
+.contracts {
+  text-align: center;
+  display: flex;
+}
+
+.contracts table {
+  justify-content: center;
 }
 
 .flex {
