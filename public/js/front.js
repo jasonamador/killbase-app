@@ -13,12 +13,7 @@ const title = `
 $(function() {
   $('.typed').typed({
     stringsElement: $('#assassin'),
-    typeSpeed: -1000,
+    typeSpeed: 0.01,
     startDelay: 1000,
   });
-  $('#title').typed({
-    strings: [title],
-    typeSpeed: -1000,
-    startDelay: 0
-  })
 });

@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
             assassin.codeNames = [];
           }
         });
-        res.render('assassins.pug', assassins);
+        res.render('assassins', {assassins});
       });
     });
   });
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
         } else {
           assassin.codeNames = [];
         }
-        res.render('assassin.pug', assassin);
+        res.render('assassin', assassin);
       });
     });
   });

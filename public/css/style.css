@@ -1,8 +1,13 @@
 @import 'reset.css';
-@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+@import url('https://fonts.googleapis.com/css?family=VT323');
 
 html {
-  font-family: 'Nova Mono', monospace;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 1.3em;
 }
 
 body {
@@ -12,5 +17,51 @@ body {
 
 pre {
   font-family: 'Courier New', Monospace;
-  font-size: 0.2em;
+  font-size: 5px;
+}
+
+th, td {
+  padding: 10px;
+}
+
+table, th, td {
+  border: 1px solid lawngreen;
+
+}
+
+.menu {
+  margin: 20px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.container {
+  margin: 30px;
+}
+
+.assassin.attribute {
+  margin-bottom: 1em;
+}
+
+.flex {
+  display: flex;
+  padding: 2em;
+  border: 2px solid lawngreen;
+}
+
+.flex div {
+  flex-grow: 1;
+}
+
+a {
+  text-decoration: none;
+  color: lawngreen;
+}
+
+a:visited {
+  text-decoration: none;
+  color: lawngreen;
 }

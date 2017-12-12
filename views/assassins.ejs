@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.6/typed.min.js"></script>
+  <script src="../js/front.js"></script>
+  <title>KiLLBASE</title>
+</head>
+<body>
+  <div class="container">
+    <pre class="title">
+ ██ ▄█▀ ██▓ ██▓     ██▓     ▄▄▄▄    ▄▄▄        ██████ ▓█████
+ ██▄█▒ ▓██▒▓██▒    ▓██▒    ▓█████▄ ▒████▄    ▒██    ▒ ▓█   ▀
+▓███▄░ ▒██▒▒██░    ▒██░    ▒██▒ ▄██▒██  ▀█▄  ░ ▓██▄   ▒███
+▓██ █▄ ░██░▒██░    ▒██░    ▒██░█▀  ░██▄▄▄▄██   ▒   ██▒▒▓█  ▄
+▒██▒ █▄░██░░██████▒░██████▒░▓█  ▀█▓ ▓█   ▓██▒▒██████▒▒░▒████▒
+▒ ▒▒ ▓▒░▓  ░ ▒░▓  ░░ ▒░▓  ░░▒▓███▀▒ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░░ ▒░ ░
+░ ░▒ ▒░ ▒ ░░ ░ ▒  ░░ ░ ▒  ░▒░▒   ░   ▒   ▒▒ ░░ ░▒  ░ ░ ░ ░  ░
+░ ░░ ░  ▒ ░  ░ ░     ░ ░    ░    ░   ░   ▒   ░  ░  ░     ░
+░  ░    ░      ░  ░    ░  ░ ░            ░  ░      ░     ░  ░
+                                 ░
+    </pre>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Code Name(s)</th>
+          <th>Weapon</th>
+          <th>Email</th>
+          <th>Price</th>
+          <th>Rating</th>
+          <th>Kills</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (assassin of assassins) { %>
+          <tr>
+            <td><a href=<%= `assassins/${assassin.id}` %>><%= assassin.name %></a></td>
+            <td><a href=<%= `assassins/${assassin.id}` %>><%= assassin.codeNames %></a></td>
+            <td><%= assassin.weapon %></td>
+            <td><%= assassin.contactInfo %></td>
+            <td><%= assassin.price %></td>
+            <td><%= assassin.rating %></td>
+            <td><%= assassin.kills %></td>
+            <td><%= assassin.age %></td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+    <div class="menu">
+      ASSASSINS | <a href="/contracts">CONTRACTS</a>
+    </div>
+  </div>
+</body>
+</html>

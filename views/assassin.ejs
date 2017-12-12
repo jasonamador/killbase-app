@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="widh3=device-widh3, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.6/typed.min.js"></script>
+  <script src="../js/front.js"></script>
+  <title>KiLLBASE</title>
+</head>
+<body>
+  <div class="container">
+    <header class="title">
+      <pre>
+ ██ ▄█▀ ██▓ ██▓     ██▓     ▄▄▄▄    ▄▄▄        ██████ ▓█████
+ ██▄█▒ ▓██▒▓██▒    ▓██▒    ▓█████▄ ▒████▄    ▒██    ▒ ▓█   ▀
+▓███▄░ ▒██▒▒██░    ▒██░    ▒██▒ ▄██▒██  ▀█▄  ░ ▓██▄   ▒███
+▓██ █▄ ░██░▒██░    ▒██░    ▒██░█▀  ░██▄▄▄▄██   ▒   ██▒▒▓█  ▄
+▒██▒ █▄░██░░██████▒░██████▒░▓█  ▀█▓ ▓█   ▓██▒▒██████▒▒░▒████▒
+▒ ▒▒ ▓▒░▓  ░ ▒░▓  ░░ ▒░▓  ░░▒▓███▀▒ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░░ ▒░ ░
+░ ░▒ ▒░ ▒ ░░ ░ ▒  ░░ ░ ▒  ░▒░▒   ░   ▒   ▒▒ ░░ ░▒  ░ ░ ░ ░  ░
+░ ░░ ░  ▒ ░  ░ ░     ░ ░    ░    ░   ░   ▒   ░  ░  ░     ░
+░  ░    ░      ░  ░    ░  ░ ░            ░  ░      ░     ░  ░
+                                 ░
+      </pre>
+    </header>
+    <div class="flex">
+      <div>
+        <div class="assassin attribute">
+          <h3>Name</h3>
+          <%= name %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Code Name(s)</h3>
+          <%= codeNames %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Weapon</h3>
+          <%= weapon %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Email</h3>
+          <%= contactInfo %>
+        </div>
+      </div>
+      <div>
+        <div class="assassin attribute">
+          <h3>Price</h3>
+          $<%= price %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Rating</h3>
+          <%= rating %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Kills</h3>
+          <%= kills %>
+        </div>
+        <div class="assassin attribute">
+          <h3>Age</h3>
+          <%= age %>
+        </div>
+      </div>
+    </div>
+    <div class="menu">
+      <a href="/assassins">ASSASSINS</a> | <a href="/contracts">CONTRACTS</a>
+    </div>
+  </div>
+</body>
+</html>
