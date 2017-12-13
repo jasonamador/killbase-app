@@ -32,8 +32,20 @@ router.get('/', (req, res) => {
             })
             .then(() => {
               res.render('contracts', {contracts});
-            });
+            })
+            .catch((e) => {
+              console.error(e);
+              res.sendStatus(500);
+            })
+      })
+      .catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
       });
+  })
+  .catch((e) => {
+    console.error(e);
+    res.sendStatus(500);
   });
 });
 
