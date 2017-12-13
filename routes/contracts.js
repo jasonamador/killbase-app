@@ -7,8 +7,8 @@ const router = express.Router();
 router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
-  let clientIdsToNames = [];
-  let targetIdsToNames = [];
+  let clientIdsToNames = {};
+  let targetIdsToNames = {};
   knex('contracts').select().then((contracts) => {
     knex('clients').select('people.name', 'clients.id')
       .leftJoin('people', 'people.id', 'clients.person_id')

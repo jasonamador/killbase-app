@@ -33,9 +33,12 @@ exports.seed = function(knex, Promise) {
       return knex('assassins').del();
     })
     .then(() => {
-      return knex.schema.raw('alter sequence assassins_id_seq restart');
+      return knex.schema.raw('ALTER SEQUENCE assassins_id_seq RESTART');
     })
-    .then(function () {
+    .then(() => {
       return knex('assassins').insert(assassinsObjs);
+    })
+    .then(() => {
+      return knex.raw(`UPDATE assassins SET hashed_id = ENCODE(DIGEST(assassins.id::text, 'sha1'), 'hex') FROM assassins b WHERE assassins.id = b.id`);
     });
 };

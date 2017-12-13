@@ -1,13 +1,18 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTableIfNotExists('people', (people) => {
-    people.increments();
-    people.string('name').defaultTo('unknown');
+  return knex.raw('create extension if not exists pgcrypto')
+  .then(() => {
+    return knex.schema.createTableIfNotExists('people', (people) => {
+      people.increments();
+      people.string('name');
+      people.boolean('active').defaultTo(true);
+    })
   })
   .then(() => {
     return knex.schema.createTableIfNotExists('clients', (clients) => {
       clients.increments();
       clients.integer('person_id');
       clients.foreign('person_id').references('people.id').onDelete('CASCADE');
+      clients.boolean('active').defaultTo(true);
     });
   })
   .then(() => {
@@ -18,11 +23,13 @@ exports.up = function(knex, Promise) {
       targets.string('location');
       targets.string('photo_url');
       targets.float('security');
+      targets.boolean('alive').defaultTo(true);
     });
   })
   .then(() => {
     return knex.schema.createTableIfNotExists('assassins', (assassins) => {
       assassins.increments();
+      assassins.string('hashed_id');
       assassins.integer('person_id');
       assassins.foreign('person_id').references('people.id').onDelete('CASCADE');
       assassins.string('weapon');
@@ -31,6 +38,7 @@ exports.up = function(knex, Promise) {
       assassins.float('rating');
       assassins.integer('kills');
       assassins.integer('age');
+      assassins.boolean('active').defaultTo(true);
     });
   })
   .then(() => {
@@ -51,6 +59,7 @@ exports.up = function(knex, Promise) {
       contracts.boolean('complete');
       contracts.integer('completed_by');
       contracts.foreign('completed_by').references('assassins.id').onDelete('SET NULL');
+      contracts.boolean('active').defaultTo(true);
     });
   })
   .then(() => {

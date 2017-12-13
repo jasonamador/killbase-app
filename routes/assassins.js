@@ -2,15 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('../knexfile')['development'];
 const knex = require('knex')(config);
+const sha1 = require('sha1')
 const router = express.Router();
 
 router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
-  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
+  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age').where('assassins.active', 'true')
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
-      knex('code_names').select().then((codeNamesDb) => {
+      knex('code_names').select()
+      .then((codeNamesDb) => {
         let codeNames = {};
         codeNamesDb.forEach((codeName) => {
           if (!codeNames[codeName.assassin_id]) {
@@ -25,7 +27,7 @@ router.get('/', (req, res) => {
             assassin.codeNames = [];
           }
         });
-        res.render('assassins', {assassins});
+        res.render('assassins', {assassins, sha1});
       })
       .catch((e) => {
         console.error(e);
@@ -34,12 +36,13 @@ router.get('/', (req, res) => {
     });
   });
 
-router.get('/:id', (req, res) => {
+router.get('/:hashed_id', (req, res) => {
   knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
-    .leftJoin('people', 'assassins.person_id', 'people.id')
-    .where('assassins.id', req.params.id).first()
+    .join('people', 'assassins.person_id', 'people.id')
+    .where('assassins.hashed_id', req.params.hashed_id).first()
     .then((assassin) => {
-      knex('code_names').select().where('assassin_id', req.params.id)
+      knex('code_names').select().join('assassins', 'code_names.assassin_id', 'assassins.id')
+      .where('assassins.hashed_id', req.params.hashed_id)
       .then((codeNamesDb) => {
         let codeNames = {};
         codeNamesDb.forEach((codeName) => {
@@ -99,6 +102,18 @@ router.post('/', (req, res) => {
     })
     .catch((e) => {
       console.error(e);
+      res.sendStatus(500);
+    });
+});
+
+router.delete('/:hashed_id', (req, res) => {
+  knex('assassins').update('active', false)
+  .where('hashed_id', req.params.hashed_id)
+    .then((assassin) => {
+      res.redirect(200, `assassins/${req.params.hashed_id}`);
+    })
+    .catch((e) => {
+      console.log(e);
       res.sendStatus(500);
     });
 });

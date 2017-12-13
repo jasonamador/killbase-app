@@ -40,8 +40,8 @@
       <tbody>
         <% for (assassin of assassins) { %>
           <tr>
-            <td><a href=<%= `assassins/${assassin.id}` %>><%= assassin.name %></a></td>
-            <td><a href=<%= `assassins/${assassin.id}` %>><%= assassin.codeNames %></a></td>
+            <td><a href=<%= `assassins/${sha1(assassin.id.toString())}` %>><%= assassin.name !== '' ? assassin.name : 'Unknown' %></a></td>
+            <td><a href=<%= `assassins/${sha1(assassin.id.toString())}` %>><%= assassin.codeNames.length > 0 ? assassin.codeNames : 'none' %></a></td>
             <td><%= assassin.weapon %></td>
             <td><%= assassin.contactInfo %></td>
             <td><%= assassin.price %></td>
