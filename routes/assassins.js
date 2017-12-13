@@ -26,6 +26,10 @@ router.get('/', (req, res) => {
           }
         });
         res.render('assassins', {assassins});
+      })
+      .catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
       });
     });
   });
@@ -50,7 +54,11 @@ router.get('/:id', (req, res) => {
           assassin.codeNames = [];
         }
         res.render('assassin', assassin);
-      });
+      })
+      .catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
+      })
     });
   });
 
@@ -73,10 +81,26 @@ router.post('/', (req, res) => {
               return knex('code_names').insert(codeNames)
                 .then(() => {
                   res.sendStatus(200);
+                })
+                .catch((e) => {
+                  console.error(e);
+                  res.sendStatus(500);
                 });
+            })
+            .catch((e) => {
+              console.error(e);
+              res.sendStatus(500);
             });
+        })
+        .catch((e) => {
+          console.error(e);
+          res.sendStatus(500);
         });
     })
+    .catch((e) => {
+      console.error(e);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
