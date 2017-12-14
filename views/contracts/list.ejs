@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <div class="container">
+    <%- include('../partials/header') %>
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Target</th>
+          <th>Budget</th>
+          <th>Status</th>
+          <th>Completed By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (contract of contracts) { %>
+          <tr>
+            <td><a href=<%= `clients/${contract.clientId}` %>><%= contract.clientName %></a></td>
+            <td><a href=<%= `targets/${contract.targetId}` %>><%= contract.targetName %></a></td>
+            <td><%= contract.budget %></td>
+            <td><%= contract.completed ? 'Completed' : 'Incomplete' %></td>
+            <td><%= contract.completedBy %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="menu">
+      <a href="/assassins">ASSASSINS</a> | CONTRACTS
+    </div>
+  </div>
+</body>
+</html>

@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
         });
       })
       .then(() => {
-        knex('targets').select('people.name', 'targets.id', 'targets.photo_url', 'targets.location', 'targets.security')
+        knex('targets').select('people.name', 'targets.id', 'people.photo_url', 'targets.location', 'targets.security')
           .leftJoin('people', 'people.id', 'targets.person_id').then((targets) => {
               targets.forEach((e) => {
                 targetIdsToNames[e.id] = e.name;
@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
               });
             })
             .then(() => {
-              res.render('contracts', {contracts});
+              res.render('contracts/list', {contracts});
             })
             .catch((e) => {
               console.error(e);
