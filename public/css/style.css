@@ -17,7 +17,6 @@ h3 {
 body {
   background: #333;
   color: limegreen;
-  text-shadow: 0px 0px 0.1em limegreen;
 }
 
 pre {
@@ -43,10 +42,8 @@ tbody tr {
 }
 
 table, th, td {
-  /*
-  border: 0.2em solid #333;
-  box-shadow: 0px 0px 0.2em limegreen;
-  */
+  /*border: 1px solid #333;*/
+  box-shadow: 0px 0px 0.1em limegreen;
 }
 
 input {
@@ -75,7 +72,7 @@ input[type=submit] {
 }
 
 .front-page {
-  border: 2px solid limegreen;
+  border: 0.2em solid limegreen;
   margin-top: 60px;
   padding: 100px;
 }
@@ -89,6 +86,7 @@ input[type=submit] {
   margin-bottom: 30px;
   color: #333;
   font-size: 0.7em;
+  text-shadow: 0px 0px 0.5em limegreen;
 }
 
 .container {
@@ -105,16 +103,13 @@ input[type=submit] {
   display: flex;
 }
 
-.contracts table {
+.flex {
+  display: flex;
   justify-content: center;
 }
 
-.flex {
-  display: flex;
-}
-
 .box {
-  border: 2px solid limegreen;
+  border: 0.2em solid limegreen;
   padding: 2em;
 }
 
@@ -157,8 +152,9 @@ a.yellow, a.yellow:visited {
 .deleted-indicator {
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
-  border: 5px solid red;
+  border: 0.2em solid red;
   padding: 30px;
   text-align: center;
   transition: all 0.1s ease-in;
+  max-width: 500px;
 }
