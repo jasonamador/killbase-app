@@ -4,6 +4,7 @@
 <body>
   <div class="container">
     <%- include('../partials/header') %>
+    <h1>NEW ASSASSIN</h1>
     <form id="createAssassinForm" action="/assassins" method="POST">
       <div class="flex">
         <div>
@@ -41,7 +42,7 @@
             <label for="kills">Kills: </label>
             <input name="kills" id="kills" />
           </div>
-          <input type="submit" id="postNewAssassin"/>
+          <input type="submit" id="postNewAssassin" value="CREATE"/>
         </div>
       </div>
     </form>

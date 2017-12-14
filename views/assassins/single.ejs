@@ -4,14 +4,15 @@
 <body>
   <div class="container">
     <%- include('../partials/header') %>
+    <h1>ASSASSIN PROFILE</h1>
     <div class="box">
       <div class="hidden red deleted-indicator" id="deletedIndicator">
         <h1>SUCCESSFULLY DELETED <%= name.toUpperCase() %></h1>
         <a id="undo" class="yellow" href="../assassins/<%= hashed_id %>">UNDO</a> | <a href="/assassins">OK</a>
       </div>
-      <h1><%= name %></h1>
       <div class="flex">
         <div>
+          <h2><%= name %></h2>
           <% if (photo_url) { %>
             <img src="<%- photo_url %>" width="200px" />
           <% } else { %>
@@ -43,9 +44,6 @@
         </div>
       </div>
       <a id="deleteLink" href="/assassins/<%= hashed_id %>" class="red">DELETE</a> | <a id="deleteLink" href="#" class="yellow">UPDATE</a>
-    </div>
-    <div class="menu">
-      <a href="/assassins/">ASSASSINS</a> | <a href="/contracts">CONTRACTS</a>
     </div>
   </div>
 </body>
