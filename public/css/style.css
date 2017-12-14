@@ -59,6 +59,11 @@ input {
   font-size: 22px;
   text-shadow: 0px 0px 0.1em limegreen;
   margin: 0.2em;
+  cursor: text;
+}
+
+input[type=submit] {
+  cursor: pointer;
 }
 
 .disabled {
