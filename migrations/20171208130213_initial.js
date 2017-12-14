@@ -4,7 +4,10 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTableIfNotExists('people', (people) => {
       people.increments();
       people.string('name');
+      people.string('photo_url');
       people.boolean('active').defaultTo(true);
+      people.boolean('alive').defaultTo(true);
+      people.date('deathdate');
     })
   })
   .then(() => {
@@ -21,9 +24,7 @@ exports.up = function(knex, Promise) {
       targets.integer('person_id');
       targets.foreign('person_id').references('people.id').onDelete('CASCADE');
       targets.string('location');
-      targets.string('photo_url');
       targets.float('security');
-      targets.boolean('alive').defaultTo(true);
     });
   })
   .then(() => {

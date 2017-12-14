@@ -22,7 +22,6 @@ exports.seed = function(knex, Promise) {
         let target = {};
         target['person_id'] = peopleNamesToIds[contracts[i][0]];
         target['location'] = contracts[i][1];
-        target['photo_url'] = contracts[i][2];
         target['security'] = contracts[i][3];
         targets.push(target);
       }

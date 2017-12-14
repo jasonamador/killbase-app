@@ -13,13 +13,19 @@ exports.seed = function(knex, Promise) {
   for (let i = 1; i < assassins.length; i++) {
     if (!names.includes(assassins[i][0])) {
       names.push(assassins[i][0]);
-      people.push({name: names[names.length - 1]});
+      people.push({
+        name: names[names.length - 1],
+      });
     }
   }
   for (let i = 1; i < contracts.length; i++) {
     if (!names.includes(contracts[i][0])) {
+      //targets
       names.push(contracts[i][0]);
-      people.push({name: names[names.length - 1]});
+      people.push({
+        name: names[names.length - 1],
+        photo_url: contracts[i][2],
+      });
     }
     if (!names.includes(contracts[i][4])) {
       names.push(contracts[i][4]);

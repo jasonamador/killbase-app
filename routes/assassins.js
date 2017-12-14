@@ -13,12 +13,13 @@ router.post('/', (req, res) => {
   let codenames= [];
   codenames.push(assassin.codename);
   delete assassin.codename;
-  knex('people').insert({name: assassin.name})
+  knex('people').insert({name: assassin.name, photo_url: assassin.photo_url})
     .then(() => {
       return knex('people').select('id').where('name', assassin.name).first()
         .then((person) => {
           assassin.person_id = Number.parseInt(person.id);
           delete assassin.name;
+          delete assassin.photo_url;
           return knex('assassins').insert(assassin);
         })
         .then(() => {
@@ -90,7 +91,7 @@ router.get('/', (req, res) => {
 
 // Read one
 router.get('/:hashed_id', (req, res) => {
-  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
+  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'people.photo_url', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
     .join('people', 'assassins.person_id', 'people.id')
     .where('assassins.hashed_id', req.params.hashed_id).first()
     .then((assassin) => {

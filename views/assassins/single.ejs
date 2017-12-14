@@ -12,6 +12,9 @@
       <h1><%= name %></h1>
       <div class="flex">
         <div>
+          <% if (photo_url) { %>
+            <img src="<%- photo_url %>" width="300px">
+          <% } %>
           <div class="assassin attribute">
             Code Name(s): <%= codenames.length > 0 ? codenames : 'none' %>
           </div>
