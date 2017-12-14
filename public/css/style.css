@@ -68,20 +68,39 @@ table, th, td {
 
 .flex {
   display: flex;
-  padding: 2em;
+}
+
+.box {
   border: 2px solid lawngreen;
+  padding: 2em;
 }
 
 .flex div {
   flex-grow: 1;
 }
 
-a {
+a, a:visited {
   text-decoration: none;
   color: lawngreen;
 }
 
-a:visited {
-  text-decoration: none;
-  color: lawngreen;
+.red, a.red, a.red:visited {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+a.yellow, a.yellow:visited {
+  color: yellow;
+}
+
+.deleted-indicator {
+  position: absolute;
+  font-size: 3em;
+  background: rgba(0, 0, 0, 0.8);
+  border: 5px solid red;
+  padding: 30px;
+  text-align: center;
 }

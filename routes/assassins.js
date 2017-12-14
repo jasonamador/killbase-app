@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
-  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age').where('assassins.active', 'true')
+  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age').where('assassins.active', 'true')
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
       knex('code_names').select()
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
   });
 
 router.get('/:hashed_id', (req, res) => {
-  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
+  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.contact_info as contactInfo', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
     .join('people', 'assassins.person_id', 'people.id')
     .where('assassins.hashed_id', req.params.hashed_id).first()
     .then((assassin) => {
@@ -109,8 +109,8 @@ router.post('/', (req, res) => {
 router.delete('/:hashed_id', (req, res) => {
   knex('assassins').update('active', false)
   .where('hashed_id', req.params.hashed_id)
-    .then((assassin) => {
-      res.redirect(200, `assassins/${req.params.hashed_id}`);
+    .then(() => {
+      res.sendStatus(200);
     })
     .catch((e) => {
       console.log(e);
@@ -118,4 +118,14 @@ router.delete('/:hashed_id', (req, res) => {
     });
 });
 
+router.patch('/:hashed_id', (req, res) => {
+  knex('assassins').where('assassins.hashed_id', req.params.hashed_id).update(req.body)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.sendStatus(500);
+    });
+});
 module.exports = router;
