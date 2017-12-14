@@ -4,6 +4,11 @@
 <body>
   <div class="container">
     <%- include('../partials/header') %>
+    <h1>CONTRACTS</h1>
+    <nav class="right">
+      <a href="contracts/incomplete">INCOMPLETE</a> |
+      <a href="contracts/complete">COMPLETE</a>
+    </nav>
     <table>
       <thead>
         <tr>
@@ -12,6 +17,7 @@
           <th>Budget</th>
           <th>Status</th>
           <th>Completed By</th>
+          <th>Assassins</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +28,7 @@
             <td><%= contract.budget %></td>
             <td><%= contract.completed ? 'Completed' : 'Incomplete' %></td>
             <td><%= contract.completedBy %></td>
+            <td>(assassins assigned)</td>
           </tr>
         <% } %>
       </tbody>

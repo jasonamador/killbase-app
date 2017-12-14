@@ -57,4 +57,10 @@ router.post('/', (req, res) => {
 
 });
 
+router.use((req, res) => {
+  console.log('catchall');
+  res.sendStatus(404);
+});
+
+
 module.exports = router;

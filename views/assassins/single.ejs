@@ -41,9 +41,12 @@
           <div class="assassin attribute">
             Kills: <%= kills %>
           </div>
+          <div>
+            <a id="deleteLink" href="/assassins/<%= hashed_id %>" class="red">DELETE</a> | <a id="deleteLink" href="#" class="yellow">UPDATE</a>
+          </div>
         </div>
       </div>
-      <a id="deleteLink" href="/assassins/<%= hashed_id %>" class="red">DELETE</a> | <a id="deleteLink" href="#" class="yellow">UPDATE</a>
+
     </div>
   </div>
 </body>
