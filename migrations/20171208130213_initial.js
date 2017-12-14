@@ -33,7 +33,7 @@ exports.up = function(knex, Promise) {
       assassins.integer('person_id');
       assassins.foreign('person_id').references('people.id').onDelete('CASCADE');
       assassins.string('weapon');
-      assassins.string('contact_info');
+      assassins.string('email');
       assassins.integer('price');
       assassins.float('rating');
       assassins.integer('kills');

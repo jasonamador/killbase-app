@@ -20,7 +20,7 @@ exports.seed = function(knex, Promise) {
           assassinsObjs.push({
             person_id: peopleNamesToIds[assassins[i][0]],
             weapon: assassins[i][2],
-            contact_info: assassins[i][3],
+            email: assassins[i][3],
             age: assassins[i][4],
             price: assassins[i][5],
             rating: assassins[i][6],
