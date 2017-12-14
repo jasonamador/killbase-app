@@ -139,7 +139,6 @@ a.yellow, a.yellow:visited {
 
 .deleted-indicator {
   position: absolute;
-  font-size: 3em;
   background: rgba(0, 0, 0, 0.8);
   border: 5px solid red;
   padding: 30px;

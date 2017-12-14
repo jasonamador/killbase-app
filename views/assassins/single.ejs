@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/head') %>
+<%- include('../partials/head') %>
 <body>
   <div class="container">
-    <%- include('partials/header') %>
+    <%- include('../partials/header') %>
     <div class="box">
       <div class="hidden red deleted-indicator" id="deletedIndicator">
         <h1>SUCCESSFULLY DELETED <%= name.toUpperCase() %></h1>
@@ -16,8 +16,7 @@
             Weapon: <%= weapon %>
           </div>
           <div class="assassin attribute">
-            <h3>Email</h3>
-            <%= contactInfo %>
+            Email: <%= email %>
           </div>
         </div>
         <div>
