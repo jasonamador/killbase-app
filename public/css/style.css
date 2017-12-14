@@ -3,7 +3,7 @@
 
 html {
   font-family: 'VT323', monospace;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 h1 {
@@ -47,6 +47,18 @@ table, th, td {
   border: 0.2em solid #333;
   box-shadow: 0px 0px 0.2em limegreen;
   */
+}
+
+input {
+  float: right;
+  background: #333;
+  color: limegreen;
+  box-shadow: 0 0 0.15em lawngreen;
+  border: none;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  text-shadow: 0px 0px 0.1em limegreen;
+  margin: 0.2em;
 }
 
 .disabled {

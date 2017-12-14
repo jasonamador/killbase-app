@@ -9,35 +9,31 @@
         <h1>SUCCESSFULLY DELETED <%= name.toUpperCase() %></h1>
         <a id="undo" class="yellow" href="../assassins/<%= hashed_id %>">UNDO</a> | <a href="/assassins">OK</a>
       </div>
+      <h1><%= name %></h1>
       <div class="flex">
         <div>
-          <h1><%= name %></h1>
           <div class="assassin attribute">
-            Weapon: <%= weapon %>
+            Code Name(s): <%= codenames.length > 0 ? codenames : 'none' %>
           </div>
           <div class="assassin attribute">
             Email: <%= email %>
           </div>
+          <div class="assassin attribute">
+            Weapon: <%= weapon %>
+          </div>
+          <div class="assassin attribute">
+            Age: <%= age %>
+          </div>
         </div>
         <div>
           <div class="assassin attribute">
-            Code Name(s): <%= codeNames %>
+            Price: $<%= price %>
           </div>
           <div class="assassin attribute">
-            <h3>Price</h3>
-            $<%= price %>
+            Rating: <%= rating %>
           </div>
           <div class="assassin attribute">
-            <h3>Rating</h3>
-            <%= rating %>
-          </div>
-          <div class="assassin attribute">
-            <h3>Kills</h3>
-            <%= kills %>
-          </div>
-          <div class="assassin attribute">
-            <h3>Age</h3>
-            <%= age %>
+            Kills: <%= kills %>
           </div>
         </div>
       </div>

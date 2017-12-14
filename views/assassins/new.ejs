@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <div class="container">
+    <%- include('../partials/header') %>
+    <form id="createAssassinForm" action="/assassins" method="POST">
+      <div class="flex">
+        <div>
+          <div class="assassin attribute">
+            <label for="name">Name: </label>
+            <input name="name" id="nameInput" />
+          </div>
+          <div class="assassin attribute">
+            <label for="codename">Code name: </label>
+            <input name="codename" id="codename" />
+          </div>
+          <div class="assassin attribute">
+            <label for="email">Email: </label>
+            <input name="email" id="email" />
+          </div>
+          <div class="assassin attribute">
+            <label for="age">Age: </label>
+            <input name="age" id="age" />
+          </div>
+        </div>
+        <div>
+          <div class="assassin attribute">
+            <label for="weapon">Weapon: </label>
+            <input name="weapon" id="weapon" />
+          </div>
+          <div class="assassin attribute">
+            <label for="price">Price: $</label>
+            <input name="price" id="price" />
+          </div>
+          <div class="assassin attribute">
+            <label for="rating">Rating (0-10): </label>
+            <input name="rating" id="rating" />
+          </div>
+          <div class="assassin attribute">
+            <label for="kills">Kills: </label>
+            <input name="kills" id="kills" />
+          </div>
+          <input type="submit" id="postNewAssassin"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

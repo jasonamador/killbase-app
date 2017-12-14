@@ -7,11 +7,12 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 
-// Create
+// Create one
 router.post('/', (req, res) => {
   let assassin = req.body;
-  let codeNames = assassin.codeNames;
-  delete assassin.codeNames;
+  let codenames= [];
+  codenames.push(assassin.codename);
+  delete assassin.codename;
   knex('people').insert({name: assassin.name})
     .then(() => {
       return knex('people').select('id').where('name', assassin.name).first()
@@ -21,12 +22,15 @@ router.post('/', (req, res) => {
           return knex('assassins').insert(assassin);
         })
         .then(() => {
+          return knex.raw(`UPDATE assassins SET hashed_id = ENCODE(DIGEST(assassins.id::text, 'sha1'), 'hex') FROM assassins b WHERE assassins.id = b.id`);
+        })
+        .then(() => {
           return knex('assassins').select('id').where('person_id', assassin.person_id).first()
             .then((a) => {
-              codeNames = codeNames.map((e) => {return {code_name: e, assassin_id: a.id}});
-              return knex('code_names').insert(codeNames)
+              codenames = codenames.map((e) => {return {code_name: e, assassin_id: a.id}});
+              return knex('code_names').insert(codenames)
                 .then(() => {
-                  res.sendStatus(200);
+                  res.send(assassin);
                 })
                 .catch((e) => {
                   console.error(e);
@@ -49,25 +53,30 @@ router.post('/', (req, res) => {
     });
 });
 
+// Form view
+router.get('/new', (req, res) => {
+  res.render('assassins/new');
+});
+
 // Read all
 router.get('/', (req, res) => {
   knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age').where('assassins.active', 'true')
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
       knex('code_names').select()
-      .then((codeNamesDb) => {
-        let codeNames = {};
-        codeNamesDb.forEach((codeName) => {
-          if (!codeNames[codeName.assassin_id]) {
-            codeNames[codeName.assassin_id] = [];
+      .then((codenamesDb) => {
+        let codenames = {};
+        codenamesDb.forEach((codename) => {
+          if (!codenames[codename.assassin_id]) {
+            codenames[codename.assassin_id] = [];
           }
-          codeNames[codeName.assassin_id].push(codeName.code_name);
+          codenames[codename.assassin_id].push(codename.code_name);
         });
         assassins.forEach((assassin) => {
-          if (codeNames[assassin.id]) {
-            assassin.codeNames = codeNames[assassin.id];
+          if (codenames[assassin.id]) {
+            assassin.codenames = codenames[assassin.id];
           } else {
-            assassin.codeNames = [];
+            assassin.codenames = [];
           }
         });
         res.render('assassins/list', {assassins, sha1});
@@ -87,18 +96,18 @@ router.get('/:hashed_id', (req, res) => {
     .then((assassin) => {
       knex('code_names').select().join('assassins', 'code_names.assassin_id', 'assassins.id')
       .where('assassins.hashed_id', req.params.hashed_id)
-      .then((codeNamesDb) => {
-        let codeNames = {};
-        codeNamesDb.forEach((codeName) => {
-          if (!codeNames[codeName.assassin_id]) {
-            codeNames[codeName.assassin_id] = [];
+      .then((codenamesDb) => {
+        let codenames = {};
+        codenamesDb.forEach((codename) => {
+          if (!codenames[codename.assassin_id]) {
+            codenames[codename.assassin_id] = [];
           }
-          codeNames[codeName.assassin_id].push(codeName.code_name);
+          codenames[codename.assassin_id].push(codename.code_name);
         });
-        if (codeNames[assassin.id]) {
-          assassin.codeNames = codeNames[assassin.id];
+        if (codenames[assassin.id]) {
+          assassin.codenames = codenames[assassin.id];
         } else {
-          assassin.codeNames = [];
+          assassin.codenames = [];
         }
         res.render('assassins/single', assassin);
       })

@@ -21,9 +21,9 @@
         <% for (assassin of assassins) { %>
           <tr>
             <td><a href=<%= `/assassins/${sha1(assassin.id.toString())}` %>><%= assassin.name !== '' ? assassin.name : 'Unknown' %></a></td>
-            <td><a href=<%= `/assassins/${sha1(assassin.id.toString())}` %>><%= assassin.codeNames.length > 0 ? assassin.codeNames : 'none' %></a></td>
+            <td><a href=<%= `/assassins/${sha1(assassin.id.toString())}` %>><%= assassin.codenames.length > 0 ? assassin.codenames : 'none' %></a></td>
             <td><%= assassin.weapon %></td>
-            <td><%= assassin.contactInfo %></td>
+            <td><%= assassin.email %></td>
             <td><%= assassin.price %></td>
             <td><%= assassin.rating %></td>
             <td><%= assassin.kills %></td>
