@@ -32,6 +32,9 @@ exports.seed = function(knex, Promise) {
       targets.forEach((target) => {
         targetNamesToIds[peopleIdsToNames[target.person_id]] = target.id;
       });
+      return knex('contracts').del();
+    })
+    .then(() => {
       return knex('contracts').insert(contracts.map((c) => {
         return {
           target_id: targetNamesToIds[c[0]],
@@ -41,4 +44,4 @@ exports.seed = function(knex, Promise) {
         };
       }));
     });
-  };
+  }

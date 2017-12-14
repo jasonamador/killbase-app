@@ -20,7 +20,6 @@ $(() => {
       data: JSON.stringify({
         'active': 'true'
       }),
-      dataType: 'json'
     })
     .then(() => {
       $('#deletedIndicator').addClass('hidden');
