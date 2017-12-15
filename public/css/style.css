@@ -21,7 +21,7 @@ h3 {
 }
 
 body {
-  background: #333;
+  background: #222;
   color: limegreen;
   text-shadow: 0 0 0.1em lawngreen;
 }
@@ -48,7 +48,7 @@ tbody tr {
 }
 
 table, th, td {
-  /*border: 1px solid #333;*/
+  /*border: 1px solid #222;*/
   box-shadow: 0px 0px 0.1em limegreen;
 }
 
@@ -58,7 +58,7 @@ nav {
 
 input {
   float: right;
-  background: #333;
+  background: #222;
   color: limegreen;
   box-shadow: 0 0 0.15em lawngreen;
   border: none;
@@ -105,7 +105,7 @@ input[type=submit] {
 }
 
 .title:hover {
-  color: #333;
+  color: #222;
 }
 
 
