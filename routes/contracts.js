@@ -6,6 +6,12 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 
+// Create
+router.post('/', (req, res) => {
+
+});
+
+// Read all
 router.get('/', (req, res) => {
   let clientIdsToNames = {};
   let targetIdsToNames = {};
@@ -49,6 +55,7 @@ router.get('/', (req, res) => {
   });
 });
 
+// Read all incomplete
 router.get('/incomplete', (req, res) => {
   let clientIdsToNames = {};
   let targetIdsToNames = {};
@@ -93,6 +100,7 @@ router.get('/incomplete', (req, res) => {
   });
 });
 
+// Read all complete
 router.get('/complete', (req, res) => {
   let clientIdsToNames = {};
   let targetIdsToNames = {};
@@ -136,16 +144,53 @@ router.get('/complete', (req, res) => {
     res.sendStatus(500);
   });
 });
-router.get('/:id', (req, res) => {
 
+// Read one
+// needs different nesting scheme, maybe promise.all
+router.get('/:id', (req, res) => {
+  let contract;
+  knex('contracts').where('id', req.params.id).first()
+  .then((contractDb) => {
+    contract = contractDb;
+  })
+  .then(() => {
+    knex('clients').where('id', contract.client_id).first()
+    .then((client) => {
+      contract.client = client;
+      knex('people').where('id', client.person_id).first()
+      .then((person) => {
+        client.person = person;
+      });
+    });
+  })
+  .then(() => {
+    knex('targets').where('id', contract.target_id).first()
+    .then((target) => {
+      contract.target = target;
+      knex('people').where('id', target.person_id).first()
+      .then((person) => {
+        target.person = person;
+        res.send(contract);
+        res.render('contracts/single', contract);
+      });
+    });
+  })
+  .catch(() => {
+    sendStatus(500);
+  });
 });
 
-router.post('/', (req, res) => {
+// Update
+router.patch('/:id', (req, res) => {
+  res.send('UPDATE ' + req.params.id);
+});
 
+// Delete
+router.delete('/:id', (req, res) => {
+  res.send('DELETE ' + req.params.id);
 });
 
 router.use((req, res) => {
-  console.log('catchall');
   res.sendStatus(404);
 });
 
