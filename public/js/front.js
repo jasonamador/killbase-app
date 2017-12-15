@@ -39,13 +39,17 @@ $(() => {
     // should probably validate this data
     $.ajax({
       url: '/contracts',
-      type: '/post',
+      type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(contract),
       dataType: 'json'
     })
     .then((contract) => {
-      window.location.href = '/contracts';
+      console.log(contract);
+      //window.location.href = '/contracts';
+    })
+    .catch((e) => {
+      console.log(e);
     });
   });
 

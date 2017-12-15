@@ -8,7 +8,8 @@ router.use(bodyParser.json());
 
 // Create
 router.post('/', (req, res) => {
-
+  console.log(req.body);
+  res.send(req.body);
 });
 
 // Read all
