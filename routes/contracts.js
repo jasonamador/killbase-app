@@ -154,29 +154,34 @@ router.get('/:id', (req, res) => {
     contract = contractDb;
   })
   .then(() => {
-    knex('clients').where('id', contract.client_id).first()
+    return knex('clients').where('id', contract.client_id).first()
     .then((client) => {
       contract.client = client;
-      knex('people').where('id', client.person_id).first()
-      .then((person) => {
-        client.person = person;
-      });
     });
   })
   .then(() => {
-    knex('targets').where('id', contract.target_id).first()
-    .then((target) => {
-      contract.target = target;
-      knex('people').where('id', target.person_id).first()
-      .then((person) => {
-        target.person = person;
-        res.send(contract);
-        res.render('contracts/single', contract);
-      });
+    return knex('people').where('id', contract.client.person_id).first()
+    .then((person) => {
+      contract.client.person = person;
     });
   })
+  .then(() => {
+    return knex('targets').where('id', contract.target_id).first()
+    .then((target) => {
+      contract.target = target;
+    });
+  })
+  .then(() => {
+    return knex('people').where('id', contract.target.person_id).first()
+    .then((person) => {
+      contract.target.person = person;
+    });
+  })
+  .then(() => {
+    res.render('contracts/single', contract);
+  })
   .catch(() => {
-    sendStatus(500);
+    res.sendStatus(500);
   });
 });
 
