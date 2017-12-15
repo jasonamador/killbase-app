@@ -46,7 +46,7 @@ $(() => {
     })
     .then((assassin) => {
       console.log("SUCCESS");
-      console.log(e);
+      window.location.href = "/assassins";
     })
     .catch((e) => {
       console.log(e);

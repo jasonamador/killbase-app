@@ -18,6 +18,9 @@
           <% } else { %>
             <img src="/img/avatar.png" width="200px" />
           <% } %>
+          <div>
+            <a id="retireLink" href="/assassins/<%= hashed_id %>">RETIRE</a> | <a id="deleteLink" href="/assassins/<%= hashed_id %>">DELETE</a> | <a id="deleteLink" href="#">UPDATE</a>
+          </div>
         </div>
         <div>
           <div class="assassin attribute">
@@ -41,8 +44,8 @@
           <div class="assassin attribute">
             Kills: <%= kills %>
           </div>
-          <div>
-            <a id="deleteLink" href="/assassins/<%= hashed_id %>" class="red">DELETE</a> | <a id="deleteLink" href="#" class="yellow">UPDATE</a>
+          <div class="assassin attribute">
+            Status: <%= active ? 'ACTIVE' : 'RETIRED' %>
           </div>
         </div>
       </div>

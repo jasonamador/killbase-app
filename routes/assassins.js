@@ -61,7 +61,7 @@ router.get('/new', (req, res) => {
 
 // Read all
 router.get('/', (req, res) => {
-  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age').where('assassins.active', 'true')
+  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', 'true')
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
       knex('code_names').select()
@@ -91,7 +91,7 @@ router.get('/', (req, res) => {
 
 // Read one
 router.get('/:hashed_id', (req, res) => {
-  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'people.photo_url', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age')
+  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'people.photo_url', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active')
     .join('people', 'assassins.person_id', 'people.id')
     .where('assassins.hashed_id', req.params.hashed_id).first()
     .then((assassin) => {

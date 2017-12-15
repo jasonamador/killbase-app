@@ -1,1 +1,56 @@
-<?= client.person.name %>
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <div class="container">
+    <%- include('../partials/header') %>
+    <h1>CONTRACT DETAILS</h1>
+    <div class="flex box">
+      <div>
+        <h2>Target</h2>
+        <div>
+          <% if (target.person.photo_url) { %>
+            <img src="<%= target.person.photo_url %>" height="300px" />
+          <% } else { %>
+            <img src="/img/avatar.png" height="300px"/>
+          <% } %>
+        </div>
+        <div>
+          Name: <%= target.person.name %>
+        </div>
+        <div>
+          Location: <%= target.location %>
+        </div>
+        <div>
+          Security Level: <%= target.security %>
+        </div>
+        <div>
+          Status:
+          <% if (complete) { %>
+            <%= completed_by ? 'Killed' : 'Died' %> on <%= target.person.deathdate %>
+            <%= completed_by ? 'by ' + completed_by : '' %>
+          <% } else { %>
+            PENDING
+          <% } %>
+        </div>
+      </div>
+      <div>
+        <h2>Client</h2>
+        <div>
+          <% if (client.person.photo_url) { %>
+            <img src="<%= target.person.photo_url %>" height="300px" />
+          <% } else { %>
+            <img src="/img/avatar.png" height="300px" />
+          <% } %>
+        </div>
+        <div>
+          Name: <%= client.person.name %>
+        </div>
+        <div>
+          Budget: $<%= budget %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
