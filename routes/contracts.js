@@ -145,6 +145,11 @@ router.get('/complete', (req, res) => {
   });
 });
 
+// Form view
+router.get('/new', (req, res) => {
+  res.render('contracts/new');
+});
+
 // Read one
 // needs different nesting scheme, maybe promise.all
 router.get('/:id', (req, res) => {

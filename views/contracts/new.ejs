@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <div class="container">
+    <%- include('../partials/header') %>
+    <h1>New Contract</h1>
+    <div class="box">
+      <form id="createContractForm" action="/contracts" method="POST">
+        <div class="flex">
+          <div>
+            <h2>Target</h2>
+            <div class="target attribute">
+              <label for="target-name">Name:</label>
+              <input name="target-name" id="targetName" />
+            </div>
+            <div class="target attribute">
+              <label for="target-photo-url">Photo URL:</label>
+              <input name="target-photo-url" id="targetPhotoURL" />
+            </div>
+            <div class="target attribute">
+              <label for="target-location">Location:</label>
+              <input name="target-location" id="targetLocation" />
+            </div>
+            <div class="target attribute">
+              <label for="target-security">Security Level:</label>
+              <input name="target-security" id="targetSecurity" />
+            </div>
+          </div>
+          <div>
+            <h2>Client</h2>
+            <div class="client attribute">
+              <label for="client-name">Name: </label>
+              <input name="client-name" id="clientName" />
+            </div>
+            <div class="client attribute">
+              <label for="client-budget">Budget: </label>
+              <input name="client-budget" id="clientBudget" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
