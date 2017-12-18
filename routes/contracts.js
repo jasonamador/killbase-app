@@ -109,8 +109,7 @@ router.post('/:contract_id/assign/:assassin_id', (req, res) => {
 router.get('/', (req, res) => {
   getAll()
   .then((contracts) => {
-    res.send(contracts);
-    // res.render('contracts/list', {contracts});
+    res.render('contracts/list', {contracts});
   });
 });
 
@@ -132,56 +131,50 @@ router.get('/complete', (req, res) => {
 
 // Read one
 router.get('/:id', (req, res) => {
-  let selects = [
-    'contract.id',
-    'contract.budget',
-  ]
-
-
-  // let contract;
-  // knex('contracts').where('id', req.params.id).first()
-  // .then((contractDb) => {
-  //   contract = contractDb;
-  // })
-  // .then(() => {
-  //   return knex('clients').where('id', contract.client_id).first()
-  //   .then((client) => {
-  //     contract.client = client;
-  //   });
-  // })
-  // .then(() => {
-  //   return knex('people').where('id', contract.client.person_id).first()
-  //   .then((person) => {
-  //     contract.client.person = person;
-  //   });
-  // })
-  // .then(() => {
-  //   return knex('targets').where('id', contract.target_id).first()
-  //   .then((target) => {
-  //     contract.target = target;
-  //   });
-  // })
-  // .then(() => {
-  //   return knex('people').where('id', contract.target.person_id).first()
-  //   .then((person) => {
-  //     contract.target.person = person;
-  //   });
-  // })
-  // .then(() => {
-  //   return knex('assassins').join('people', 'person_id', 'people.id')
-  //     .join('assassins_contracts', 'assassins_id', 'assassins.id')
-  //     .where('contracts_id', contract.id)
-  //   .then((assassins) => {
-  //     contract.assassins = assassins;
-  //   });
-  // })
-  // .then(() => {
-  //   res.render('contracts/single', contract);
-  //   //res.send(contract);
-  // })
-  // .catch(() => {
-  //   res.sendStatus(500);
-  // });
+  let contract;
+  knex('contracts').where('id', req.params.id).first()
+  .then((contractDb) => {
+    contract = contractDb;
+  })
+  .then(() => {
+    return knex('clients').where('id', contract.client_id).first()
+    .then((client) => {
+      contract.client = client;
+    });
+  })
+  .then(() => {
+    return knex('people').where('id', contract.client.person_id).first()
+    .then((person) => {
+      contract.client.person = person;
+    });
+  })
+  .then(() => {
+    return knex('targets').where('id', contract.target_id).first()
+    .then((target) => {
+      contract.target = target;
+    });
+  })
+  .then(() => {
+    return knex('people').where('id', contract.target.person_id).first()
+    .then((person) => {
+      contract.target.person = person;
+    });
+  })
+  .then(() => {
+    return knex('assassins').join('people', 'person_id', 'people.id')
+      .join('assassins_contracts', 'assassins_id', 'assassins.id')
+      .where('contracts_id', contract.id)
+    .then((assassins) => {
+      contract.assassins = assassins;
+    });
+  })
+  .then(() => {
+    // res.render('contracts/single', contract);
+    res.send(contract);
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  });
 });
 
 // Update
