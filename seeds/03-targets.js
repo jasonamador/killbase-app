@@ -26,6 +26,9 @@ exports.seed = function(knex, Promise) {
         targets.push(target);
       }
 
-      return knex('targets').insert(targets);
+      return knex('targets').del()
+      .then(() => knex.schema.raw('alter sequence targets_id_seq restart'))
+      .then(() => knex('targets').insert(targets)
+      );
     })
   };

@@ -169,8 +169,8 @@ router.get('/:id', (req, res) => {
     });
   })
   .then(() => {
-    // res.render('contracts/single', contract);
-    res.send(contract);
+    res.render('contracts/single', contract);
+    // res.send(contract);
   })
   .catch(() => {
     res.sendStatus(500);
@@ -186,7 +186,6 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   res.send('DELETE ' + req.params.id);
 });
-
 
 router.use((req, res) => {
   res.sendStatus(404);
