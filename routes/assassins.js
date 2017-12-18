@@ -23,9 +23,6 @@ router.post('/', (req, res) => {
           return knex('assassins').insert(assassin);
         })
         .then(() => {
-          return knex.raw(`UPDATE assassins SET hashed_id = ENCODE(DIGEST(assassins.id::text, 'sha1'), 'hex') FROM assassins b WHERE assassins.id = b.id`);
-        })
-        .then(() => {
           return knex('assassins').select('id').where('person_id', assassin.person_id).first()
             .then((a) => {
               codenames = codenames.map((e) => {return {code_name: e, assassin_id: a.id}});
@@ -61,7 +58,7 @@ router.get('/new', (req, res) => {
 
 // Read all
 router.get('/', (req, res) => {
-  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', 'true')
+  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', 'true')
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
       knex('code_names').select()
@@ -90,13 +87,13 @@ router.get('/', (req, res) => {
   });
 
 // Read one
-router.get('/:hashed_id', (req, res) => {
-  knex('assassins').select('assassins.id', 'assassins.hashed_id', 'people.name', 'people.photo_url', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active')
+router.get('/:id', (req, res) => {
+  knex('assassins').select('assassins.id', 'people.name', 'people.photo_url', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active')
     .join('people', 'assassins.person_id', 'people.id')
-    .where('assassins.hashed_id', req.params.hashed_id).first()
+    .where('assassins.id', req.params.id).first()
     .then((assassin) => {
       knex('code_names').select().join('assassins', 'code_names.assassin_id', 'assassins.id')
-      .where('assassins.hashed_id', req.params.hashed_id)
+      .where('assassins.id', req.params.id)
       .then((codenamesDb) => {
         let codenames = {};
         codenamesDb.forEach((codename) => {
@@ -120,8 +117,8 @@ router.get('/:hashed_id', (req, res) => {
   });
 
 // Update one
-router.patch('/:hashed_id', (req, res) => {
-  knex('assassins').where('assassins.hashed_id', req.params.hashed_id).update(req.body)
+router.patch('/:id', (req, res) => {
+  knex('assassins').where('assassins.id', req.params.id).update(req.body)
     .then(() => {
       res.sendStatus(200);
     })
@@ -132,9 +129,9 @@ router.patch('/:hashed_id', (req, res) => {
 });
 
 // Delete one
-router.delete('/:hashed_id', (req, res) => {
+router.delete('/:id', (req, res) => {
   knex('assassins').update('active', false)
-  .where('hashed_id', req.params.hashed_id)
+  .where('id', req.params.id)
     .then(() => {
       res.sendStatus(200);
     })

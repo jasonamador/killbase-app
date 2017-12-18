@@ -8,7 +8,7 @@
     <div class="box">
       <div class="hidden red deleted-indicator" id="deletedIndicator">
         <h1>SUCCESSFULLY DELETED <%= name.toUpperCase() %></h1>
-        <a id="undo" class="yellow" href="../assassins/<%= hashed_id %>">UNDO</a> | <a href="/assassins">OK</a>
+        <a id="undo" class="yellow" href="../assassins/<%= id %>">UNDO</a> | <a href="/assassins">OK</a>
       </div>
       <div class="flex">
         <div>
@@ -19,7 +19,7 @@
             <img src="/img/avatar.png" width="200px" />
           <% } %>
           <div>
-            <a id="retireLink" href="/assassins/<%= hashed_id %>">RETIRE</a> | <a id="deleteLink" href="/assassins/<%= hashed_id %>">DELETE</a> | <a id="deleteLink" href="#">UPDATE</a>
+            <a id="retireLink" href="/assassins/<%= id %>">RETIRE</a> | <a id="deleteLink" href="/assassins/<%= id %>">DELETE</a> | <a id="deleteLink" href="#">UPDATE</a>
           </div>
         </div>
         <div>

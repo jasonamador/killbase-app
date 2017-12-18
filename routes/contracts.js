@@ -249,8 +249,8 @@ router.get('/:id', (req, res) => {
     });
   })
   .then(() => {
-    //res.render('contracts/single', contract);
-    res.send(contract);
+    res.render('contracts/single', contract);
+    //res.send(contract);
   })
   .catch(() => {
     res.sendStatus(500);
