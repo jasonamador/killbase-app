@@ -91,7 +91,7 @@ $(() => {
       data: '{}'
     })
     .then(() => {
-      window.location.reload(true); 
+      window.location.reload(true);
     });
   });
 });
