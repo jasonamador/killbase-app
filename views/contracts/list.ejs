@@ -18,7 +18,6 @@
           <th>Budget</th>
           <th>Status</th>
           <th>Completed By</th>
-          <th>Assassins</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +28,6 @@
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.budget %></a></td>
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completed ? 'Completed' : 'Incomplete' %></a></td>
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completedBy %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>>(assassins assigned)</a></td>
           </tr>
         <% } %>
       </tbody>

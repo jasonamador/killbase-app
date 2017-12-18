@@ -10,46 +10,58 @@
         <div>
           <h2>Target</h2>
           <div>
-            <% if (target.person.photo_url) { %>
-              <img src="<%= target.person.photo_url %>" height="300px" />
+            <% if (contract.target.person.photo_url) { %>
+              <img src="<%= contract.target.person.photo_url %>" height="300px" />
             <% } else { %>
               <img src="/img/avatar.png" height="300px"/>
             <% } %>
           </div>
           <div>
-            Name: <%= target.person.name %>
+            Name: <%= contract.target.person.name %>
           </div>
           <div>
-            Location: <%= target.location %>
+            Location: <%= contract.target.location %>
           </div>
           <div>
-            Security Level: <%= target.security %>
+            Security Level: <%= contract.target.security %>
           </div>
           <div>
             Status:
-            <% if (complete) { %>
-              <%= completed_by ? 'Killed' : 'Died' %> on <%= target.person.deathdate %>
-              <%= completed_by ? 'by ' + completed_by : '' %>
+            <% if (contract.complete) { %>
+              <%= contract.completed_by ? 'Killed' : 'Died' %> on <%= contract.target.person.deathdate %>
+              <%= contract.completed_by ? 'by ' + contract.completed_by : '' %>
             <% } else { %>
               PENDING
             <% } %>
           </div>
         </div>
         <div>
-          <h3>Client</h3>
+          <h2>Client</h2>
           <div>
-            Name: <%= client.person.name %>
+            Name: <%= contract.client.person.name %>
           </div>
           <div>
-            Budget: $<%= budget %>
+            Budget: $<%= contract.budget %>
           </div>
-          <h3>Assigned Assassins</h3>
+          <h2>Assassins</h2>
           <div>
-            <% for (assassin of assassins) { %>
-              <div>
-                <a href="/assassins/<%= assassin.id %>" ><%= assassin.name === '' ? 'Unknown' : assassin.name %> </a>
-              </div>
+            <% if (contract.assassins.length > 0) { %>
+              <% for (assassin of contract.assassins) { %>
+                <div>
+                  <a href="/assassins/<%= assassin.id %>" ><%= assassin.name === '' ? 'Unknown' : assassin.name %> </a>
+                </div>
+              <% } %>
+            <% } else { %>
+              none
             <% } %>
+          </div>
+          <div>
+            <select id="assignAssassin">
+              <% for (assassin of assassins) { %>
+                <option value="<%= assassin.id %>"><%= assassin.name %></option>
+              <% } %>
+            </select>
+            <input type="submit" id="assignAssassinButton" value="ASSIGN" action="/contracts/<%= contract.id %>" />
           </div>
         </div>
       </div>

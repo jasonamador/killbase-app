@@ -132,6 +132,7 @@ router.get('/complete', (req, res) => {
 // Read one
 router.get('/:id', (req, res) => {
   let contract;
+  let assassins;
   knex('contracts').where('id', req.params.id).first()
   .then((contractDb) => {
     contract = contractDb;
@@ -169,8 +170,14 @@ router.get('/:id', (req, res) => {
     });
   })
   .then(() => {
-    res.render('contracts/single', contract);
-    // res.send(contract);
+    return knex('assassins').join('people', 'person_id', 'people.id')
+    .then((dBassassins) => {
+      assassins = dBassassins;
+    });
+  })
+  .then(() => {
+    // res.send(assassins);
+    res.render('contracts/single', {contract, assassins});
   })
   .catch(() => {
     res.sendStatus(500);

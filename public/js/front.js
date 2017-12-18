@@ -76,4 +76,22 @@ $(() => {
     });
 
   });
+
+  $('#assignAssassinButton').on('click', (e) => {
+    e.preventDefault();
+
+    let contractId = $('#assignAssassinButton').attr('action');
+    let assassinId = $('#assignAssassin').val();
+    console.log(contractId + '/assign/' + assassinId);
+
+    $.ajax({
+      url: contractId + '/assign/' + assassinId,
+      type: 'POST',
+      contentType: 'application/json',
+      data: '{}'
+    })
+    .then(() => {
+      window.location.reload(true); 
+    });
+  });
 });
