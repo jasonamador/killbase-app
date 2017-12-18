@@ -34,6 +34,7 @@ exports.seed = function(knex, Promise) {
       });
       return knex('contracts').del();
     })
+    .then(() => knex.schema.raw('alter sequence contracts_id_seq restart'))
     .then(() => {
       return knex('contracts').insert(contracts.map((c) => {
         return {

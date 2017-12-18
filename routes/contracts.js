@@ -6,6 +6,11 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 
+// New contract form view
+router.get('/new', (req, res) => {
+  res.render('contracts/new');
+});
+
 // Create
 router.post('/', (req, res) => {
   let contract = {
@@ -54,7 +59,19 @@ router.post('/', (req, res) => {
 
   // insert the contract
   Promise.all([insertTarget, insertClient]).then(() => {
-    return knex('contracts').insert(contract);
+    return knex('contracts').insert(contract).then(() => {
+      res.sendStatus(200);
+    })
+  });
+});
+
+// Create assassins_contracts (assign an assassin)
+router.post('/:contract_id/assign/:assassin_id', (req, res) => {
+  knex('assassins_contracts').insert( {
+    assassins_id: req.params.assassin_id,
+    contracts_id: req.params.contract_id
+  }).then(() => {
+    res.sendStatus(200);
   });
 });
 
@@ -241,10 +258,6 @@ router.delete('/:id', (req, res) => {
   res.send('DELETE ' + req.params.id);
 });
 
-// New contract form view
-router.get('/new', (req, res) => {
-  res.render('contracts/new');
-});
 
 router.use((req, res) => {
   res.sendStatus(404);

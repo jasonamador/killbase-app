@@ -44,9 +44,9 @@ $(() => {
       data: JSON.stringify(contract),
       //dataType: 'json'
     })
-    .then((contract) => {
-      console.log(contract);
-      //window.location.href = '/contracts';
+    .then(() => {
+      console.log('success');
+      window.location.href = '/contracts';
     })
     .catch((e) => {
       console.log(e);
