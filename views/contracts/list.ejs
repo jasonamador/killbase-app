@@ -24,8 +24,8 @@
       <tbody>
         <% for (contract of contracts) { %>
           <tr>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.clientName %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.targetName %></a></td>
+            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.client_name %></a></td>
+            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.target_name %></a></td>
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.budget %></a></td>
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completed ? 'Completed' : 'Incomplete' %></a></td>
             <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completedBy %></a></td>
