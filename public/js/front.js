@@ -42,7 +42,7 @@ $(() => {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(contract),
-      dataType: 'json'
+      //dataType: 'json'
     })
     .then((contract) => {
       console.log(contract);

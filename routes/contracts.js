@@ -8,8 +8,54 @@ router.use(bodyParser.json());
 
 // Create
 router.post('/', (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
+  let contract = {
+    budget: req.body.budget,
+    complete: false,
+    active: true,
+  };
+
+  let clientPerson = {
+    name: req.body.clientName,
+    photo_url: req.body.clientPhotoURL,
+  };
+
+  let targetPerson = {
+    name: req.body.targetName,
+    photo_url: req.body.targetPhotoURL,
+  };
+
+  let target = {
+    location: req.body.targetLocation,
+    security: req.body.targetSecurity,
+  };
+
+  let client = {
+  };
+
+  // create and insert the target
+  let insertTarget = knex('people').insert(targetPerson).returning('id')
+    .then((id) => {
+      target.person_id = id[0];
+      return knex('targets').insert(target).returning('id')
+        .then((id) => {
+          contract.target_id = id[0];
+        });
+    });
+
+  // create and insert the client
+  let insertClient = knex('people').insert(clientPerson).returning('id')
+    .then((id) => {
+      client.person_id = id[0];
+      return knex('clients').insert(client).returning('id')
+        .then((id) => {
+          contract.client_id = id[0];
+        });
+    });
+
+  // insert the contract
+  Promise.all([insertTarget, insertClient]).then(() => {
+    return knex('contracts').insert(contract);
+  });
 });
 
 // Read all
@@ -146,13 +192,7 @@ router.get('/complete', (req, res) => {
   });
 });
 
-// Form view
-router.get('/new', (req, res) => {
-  res.render('contracts/new');
-});
-
 // Read one
-// needs different nesting scheme, maybe promise.all
 router.get('/:id', (req, res) => {
   let contract;
   knex('contracts').where('id', req.params.id).first()
@@ -201,9 +241,13 @@ router.delete('/:id', (req, res) => {
   res.send('DELETE ' + req.params.id);
 });
 
+// New contract form view
+router.get('/new', (req, res) => {
+  res.render('contracts/new');
+});
+
 router.use((req, res) => {
   res.sendStatus(404);
 });
-
 
 module.exports = router;
