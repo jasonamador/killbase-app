@@ -241,7 +241,16 @@ router.get('/:id', (req, res) => {
     });
   })
   .then(() => {
-    res.render('contracts/single', contract);
+    return knex('assassins').join('people', 'person_id', 'people.id')
+      .join('assassins_contracts', 'assassins_id', 'assassins.id')
+      .where('contracts_id', contract.id)
+    .then((assassins) => {
+      contract.assassins = assassins;
+    });
+  })
+  .then(() => {
+    //res.render('contracts/single', contract);
+    res.send(contract);
   })
   .catch(() => {
     res.sendStatus(500);
