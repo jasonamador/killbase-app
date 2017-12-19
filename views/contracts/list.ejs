@@ -10,28 +10,30 @@
       <a href="/contracts/complete">COMPLETE</a> |
       <a href="/contracts/new">CREATE NEW</a>
     </nav>
-    <table>
-      <thead>
-        <tr>
-          <th>Client</th>
-          <th>Target</th>
-          <th>Budget</th>
-          <th>Status</th>
-          <th>Completed By</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (contract of contracts) { %>
+    <div class="flex">
+      <table>
+        <thead>
           <tr>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.client_name %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.target_name %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.budget %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completed ? 'Completed' : 'Incomplete' %></a></td>
-            <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completedBy %></a></td>
+            <th>Client</th>
+            <th>Target</th>
+            <th>Budget</th>
+            <th>Status</th>
+            <th>Completed By</th>
           </tr>
-        <% } %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% for (contract of contracts) { %>
+            <tr>
+              <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.client_name %></a></td>
+              <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.target_name %></a></td>
+              <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.budget %></a></td>
+              <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completed ? 'Completed' : 'Incomplete' %></a></td>
+              <td><a href=<%= `/contracts/${contract.id}` %>><%= contract.completedBy %></a></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>
 </html>
