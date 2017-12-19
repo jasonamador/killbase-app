@@ -13,36 +13,21 @@ router.post('/', (req, res) => {
   let codenames= [];
   codenames.push(assassin.codename);
   delete assassin.codename;
+  // Insert the person
   knex('people').insert({name: assassin.name, photo_url: assassin.photo_url})
-    .then(() => {
-      return knex('people').select('id').where('name', assassin.name).first()
-        .then((person) => {
-          assassin.person_id = Number.parseInt(person.id);
-          delete assassin.name;
-          delete assassin.photo_url;
-          return knex('assassins').insert(assassin);
-        })
+    .returning('id')
+    .then((ids) => {
+      // Insert the assassin
+      assassin.person_id = ids[0];
+      delete assassin.name;
+      delete assassin.photo_url;
+      return knex('assassins').insert(assassin).returning('id');
+    })
+    .then((ids) => {
+      codenames = codenames.map((e) => {return {code_name: e, assassin_id: ids[0]}});
+      return knex('code_names').insert(codenames)
         .then(() => {
-          return knex('assassins').select('id').where('person_id', assassin.person_id).first()
-            .then((a) => {
-              codenames = codenames.map((e) => {return {code_name: e, assassin_id: a.id}});
-              return knex('code_names').insert(codenames)
-                .then(() => {
-                  res.send(assassin);
-                })
-                .catch((e) => {
-                  console.error(e);
-                  res.sendStatus(500);
-                });
-            })
-            .catch((e) => {
-              console.error(e);
-              res.sendStatus(500);
-            });
-        })
-        .catch((e) => {
-          console.error(e);
-          res.sendStatus(500);
+          res.send(assassin);
         });
     })
     .catch((e) => {
