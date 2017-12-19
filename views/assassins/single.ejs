@@ -6,9 +6,13 @@
     <%- include('../partials/header') %>
     <h1>ASSASSIN PROFILE</h1>
     <div class="box">
+      <div class="hidden red retired-indicator" id="retiredIndicator">
+        <h1>SUCCESSFULLY RETIRED <%= name.toUpperCase() %></h1>
+        <a id="undo" class="yellow" href="../assassins/<%= id %>">UNDO</a> | <a href="/assassins">OK</a>
+      </div>
       <div class="hidden red deleted-indicator" id="deletedIndicator">
         <h1>SUCCESSFULLY DELETED <%= name.toUpperCase() %></h1>
-        <a id="undo" class="yellow" href="../assassins/<%= id %>">UNDO</a> | <a href="/assassins">OK</a>
+        <a href="/assassins">OK</a>
       </div>
       <div class="flex">
         <div>
@@ -19,7 +23,7 @@
             <img src="/img/avatar.png" width="200px" />
           <% } %>
           <div>
-            <a id="retireLink" href="/assassins/<%= id %>">RETIRE</a> | <a id="deleteLink" href="/assassins/<%= id %>">DELETE</a> | <a id="deleteLink" href="#">UPDATE</a>
+            <a id="assassinRetireLink" href="/assassins/<%= id %>/retire">RETIRE</a> | <a id="assassinDeleteLink" href="/assassins/<%= id %>">DELETE</a> | <a id="deleteLink" href="#">UPDATE</a>
           </div>
         </div>
         <div>

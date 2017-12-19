@@ -58,7 +58,67 @@ router.get('/new', (req, res) => {
 
 // Read all
 router.get('/', (req, res) => {
-  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', 'true')
+  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active')
+    .leftJoin('people', 'assassins.person_id', 'people.id')
+    .then((assassins) => {
+      knex('code_names').select()
+      .then((codenamesDb) => {
+        let codenames = {};
+        codenamesDb.forEach((codename) => {
+          if (!codenames[codename.assassin_id]) {
+            codenames[codename.assassin_id] = [];
+          }
+          codenames[codename.assassin_id].push(codename.code_name);
+        });
+        assassins.forEach((assassin) => {
+          if (codenames[assassin.id]) {
+            assassin.codenames = codenames[assassin.id];
+          } else {
+            assassin.codenames = [];
+          }
+        });
+        res.render('assassins/list', {assassins, sha1});
+      })
+      .catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
+      });
+    });
+  });
+
+// Read active
+router.get('/active', (req, res) => {
+  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', true)
+    .leftJoin('people', 'assassins.person_id', 'people.id')
+    .then((assassins) => {
+      knex('code_names').select()
+      .then((codenamesDb) => {
+        let codenames = {};
+        codenamesDb.forEach((codename) => {
+          if (!codenames[codename.assassin_id]) {
+            codenames[codename.assassin_id] = [];
+          }
+          codenames[codename.assassin_id].push(codename.code_name);
+        });
+        assassins.forEach((assassin) => {
+          if (codenames[assassin.id]) {
+            assassin.codenames = codenames[assassin.id];
+          } else {
+            assassin.codenames = [];
+          }
+        });
+        res.render('assassins/list', {assassins, sha1});
+      })
+      .catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
+      });
+    });
+  });
+
+// Read retired
+router.get('/retired', (req, res) => {
+  knex('assassins').select('assassins.id', 'people.name', 'assassins.weapon', 'assassins.email as email', 'assassins.price', 'assassins.rating', 'assassins.kills', 'assassins.age', 'assassins.active').where('assassins.active', false)
     .leftJoin('people', 'assassins.person_id', 'people.id')
     .then((assassins) => {
       knex('code_names').select()
@@ -116,8 +176,22 @@ router.get('/:id', (req, res) => {
     });
   });
 
+// Retire one
+router.patch('/:id/retire', (req, res) => {
+  console.log('retire');
+  knex('assassins').where('id', req.params.id).update('active', false)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.sendStatus(500);
+    });
+});
+
 // Update one
 router.patch('/:id', (req, res) => {
+  console.log('update');
   knex('assassins').where('assassins.id', req.params.id).update(req.body)
     .then(() => {
       res.sendStatus(200);
@@ -128,9 +202,10 @@ router.patch('/:id', (req, res) => {
     });
 });
 
+
 // Delete one
 router.delete('/:id', (req, res) => {
-  knex('assassins').update('active', false)
+  knex('assassins').del()
   .where('id', req.params.id)
     .then(() => {
       res.sendStatus(200);

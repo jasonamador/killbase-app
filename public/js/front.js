@@ -1,11 +1,23 @@
 $(() => {
-  $('#deleteLink').on('click', (e) => {
+  $('#assassinDeleteLink').on('click', (e) => {
     e.preventDefault();
     $.ajax({
-      url: $('#deleteLink').attr('href'),
+      url: $('#assassinDeleteLink').attr('href'),
       type: 'DELETE'
     }).then(() => {
       $('#deletedIndicator').removeClass('hidden');
+    }).catch((e) => {
+      console.log(e);
+    });
+  });
+
+  $('#assassinRetireLink').on('click', (e) => {
+    e.preventDefault();
+    $.ajax({
+      url: $('#assassinRetireLink').attr('href'),
+      type: 'PATCH'
+    }).then(() => {
+      $('#retiredIndicator').removeClass('hidden');
     }).catch((e) => {
       console.log(e);
     });
@@ -22,7 +34,7 @@ $(() => {
       }),
     })
     .then(() => {
-      $('#deletedIndicator').addClass('hidden');
+      $('#retiredIndicator').addClass('hidden');
     })
     .catch((e) => {
       console.log(e);

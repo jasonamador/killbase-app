@@ -175,7 +175,7 @@ a.yellow, a.yellow:visited {
   color: yellow;
 }
 
-.deleted-indicator {
+.retired-indicator, .deleted-indicator {
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
   border: 0.2em solid red;

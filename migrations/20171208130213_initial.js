@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
       people.increments();
       people.string('name');
       people.string('photo_url');
-      people.boolean('active').defaultTo(true);
       people.boolean('alive').defaultTo(true);
       people.date('deathdate');
     })
