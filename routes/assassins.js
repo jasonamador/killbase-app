@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('../knexfile')['development'];
+const config = require('../knexfile')[process.env.ENVIRONMENT];
 const knex = require('knex')(config);
 const sha1 = require('sha1')
 const router = express.Router();
