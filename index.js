@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
 const app = express();
 
+console.log(process.env.TEST);
+
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
